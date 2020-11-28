@@ -1,0 +1,10 @@
+<p>login works!</p>
+<button (click)="signInWithGoogle()">signInWithGoogle</button>
+<button (click)="signInWithFB()">signInWithGoogle</button>
+<pre>
+  {{ user$ | async | json }}
+</pre>
+<div *ngIf="user$ | async as user">
+  <img [src]="user.photoUrl" alt="">
+</div>
+
