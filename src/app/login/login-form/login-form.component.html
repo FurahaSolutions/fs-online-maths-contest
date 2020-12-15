@@ -1,0 +1,28 @@
+<form [formGroup]="loginForm" (submit)="login()">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><fa-icon [icon]="faUser"></fa-icon></span>
+    </div>
+    <input formControlName="username" autocomplete="email" type="text" class="form-control" aria-label="Username">
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><fa-icon [icon]="faLock"></fa-icon></span>
+    </div>
+    <input formControlName="password" autocomplete="password" type="password" class="form-control" aria-label="Username">
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+
+  <div class="d-flex justify-content-between mt-2">
+    <div>
+      <label class="checkbox">
+        <input type="checkbox" value="remember-me"> Remember Me
+      </label>
+    </div>
+    <div>
+      <p class="forgotPwd">
+        <a href="#">Forgot password?</a>
+      </p>
+    </div>
+  </div>
+</form>

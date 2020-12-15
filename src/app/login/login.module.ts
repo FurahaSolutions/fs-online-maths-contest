@@ -3,14 +3,23 @@ import {CommonModule} from '@angular/common';
 import {LoginComponent} from './login/login.component';
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from 'angularx-social-login';
 import {LoginRoutingModule} from './login-routing.module';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {RouterModule} from '@angular/router';
+import {LoginFormComponent} from './login-form/login-form.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, LoginFormComponent],
   imports: [
     CommonModule,
     SocialLoginModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    FontAwesomeModule,
+    RouterModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
     {

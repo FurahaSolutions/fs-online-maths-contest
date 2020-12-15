@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="d-flex justify-content-center flex-wrap">
+    <h1 class="title" *ngIf="titleDisplayTimer$ | async">{{ title$ | async }}</h1>
+    <div class="col-12 d-flex justify-content-center mt-lg-5">
+      <span class="btn btn-primary" *ngIf="(redirectAfterDelay$ | async) || typedTitleSubject$.value.length === title.length; else loginButton">Redirecting...</span>
+      <ng-template #loginButton>
+        <a class="btn btn-primary" [routerLink]="['/login']">Login</a>
+      </ng-template>
+    </div>
+  </div>
+
+</div>

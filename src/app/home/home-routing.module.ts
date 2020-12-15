@@ -1,14 +1,12 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {LoginComponent} from './login/login.component';
-import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from 'angularx-social-login';
 import {RouterModule, Routes} from '@angular/router';
+import {HomeComponent} from './home/home.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: LoginComponent
+    component: HomeComponent
   }
 ];
 
@@ -19,5 +17,5 @@ const routes: Routes = [
   ],
 
 })
-export class LoginRoutingModule {
+export class HomeRoutingModule {
 }
