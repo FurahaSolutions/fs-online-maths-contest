@@ -28,7 +28,7 @@ export class HomeComponent extends titleMixin() {
     interval(speed).pipe(
       map(x => word.substr(0, x + 1)),
       take(word.length)
-    )
+    );
 
   typeEffect(word): Observable<any> {
     return concat(

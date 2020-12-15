@@ -11,7 +11,7 @@ export class AuthService {
   }
 
   socialLogin = (socialUser: SocialUser) =>
-    this.httpClient.post('/login/social', socialUser)
+    this.httpClient.post('/login/social', socialUser);
   login = (data: { username: string; password: string }) =>
-    this.httpClient.post('/login', data)
+    this.httpClient.post('/login', data);
 }
