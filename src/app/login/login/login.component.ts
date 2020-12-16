@@ -6,6 +6,7 @@ import {titleMixin} from '../../shared/mixins/title.mixin';
 import {mergeMap, tap} from 'rxjs/operators';
 import {from} from 'rxjs';
 import {AuthService} from '../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +18,17 @@ export class LoginComponent extends titleMixin() {
   faFacebook = faFacebook;
   faGoogle = faGoogle;
 
-  constructor(private socialAuthService: SocialAuthService, private authService: AuthService) {
+  constructor(
+    private socialAuthService: SocialAuthService,
+    private authService: AuthService,
+    private router: Router) {
     super();
   }
 
   signInWithSocial(providerId: string): void {
     from(this.socialAuthService.signIn(providerId)).pipe(
-      mergeMap(socialUser => this.authService.socialLogin(socialUser))
+      mergeMap(socialUser => this.authService.socialLogin(socialUser)),
+      mergeMap(() => from(this.router.navigate(['/dashboard'])))
     ).subscribe();
   }
 

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SocialUser} from 'angularx-social-login';
-import {tap} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
+import {BehaviorSubject, of} from 'rxjs';
 
 export interface IUser {
   firstName: string;
@@ -27,8 +27,16 @@ export class AuthService {
   private rememberMe = false;
   private authUserSubject$ = new BehaviorSubject<IUser | null>(null);
   authUser$ = this.authUserSubject$.asObservable();
-  constructor(private httpClient: HttpClient) {
+  getStoredUser = (storageMethod: typeof localStorage | typeof sessionStorage) =>
+    JSON.parse(String(storageMethod.getItem('token')));
+
+  get storedToken(): IToken | null {
+    return this.getStoredUser(sessionStorage) || this.getStoredUser(localStorage);
   }
+
+  getUserProfile = () => this.httpClient.get<IUser>('/user').pipe(
+    tap(this.authUserSubject$.next)
+  );
 
   socialLogin = (socialUser: SocialUser) =>
     this.httpClient.post<ITokenResponse>('/login/social', socialUser).pipe(
@@ -39,7 +47,7 @@ export class AuthService {
 
   authenticateApp = (response: ITokenResponse) => {
     this.storeToken(response.token);
-    this.authUserSubject$.next(response.user)
+    this.authUserSubject$.next(response.user);
   };
   storeToken = (token: IToken) => {
     if (this.rememberMe) {
@@ -47,6 +55,20 @@ export class AuthService {
     } else {
       sessionStorage.setItem('token', JSON.stringify(token));
     }
-  }
+  };
 
+  tokenInvalidate = () => this.httpClient.get<any>('/logout');
+
+  clearUser = () => {
+    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
+    this.authUserSubject$.next(null);
+  };
+
+  logout = () => this.tokenInvalidate().pipe(
+    catchError(() => of(null)),
+    tap(this.clearUser),
+  );
+  constructor(private httpClient: HttpClient) {
+  }
 }
