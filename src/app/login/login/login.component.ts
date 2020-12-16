@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService} from 'angularx-social-login';
 import {faFacebook} from '@fortawesome/free-brands-svg-icons/faFacebook';
 import {faGoogle} from '@fortawesome/free-brands-svg-icons/faGoogle';
-import {titleMixin} from '../../../shared/mixins/title.mixin';
+import {titleMixin} from '../../shared/mixins/title.mixin';
 import {mergeMap, tap} from 'rxjs/operators';
 import {from} from 'rxjs';
 import {AuthService} from '../services/auth.service';

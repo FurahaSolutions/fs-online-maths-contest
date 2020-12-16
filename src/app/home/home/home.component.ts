@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {concat, from, interval, Observable, of, timer} from 'rxjs';
 import {concatMap, delay, filter, ignoreElements, map, mergeMap, take, tap} from 'rxjs/operators';
 import {Router} from '@angular/router';
-import {titleMixin} from '../../../shared/mixins/title.mixin';
+import {titleMixin} from '../../shared/mixins/title.mixin';
 
 @Component({
   selector: 'app-home',
