@@ -1,0 +1,41 @@
+$bg-color: #2A265F;
+$text-color: lighten($bg-color, 50%);
+
+.contest-name {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  min-height: 8rem;
+  background: $bg-color;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.contest-status {
+  position: absolute;
+  top: 10px;
+  color: $text-color;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+.contest-previous-link {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  color: lighten($text-color, 10%);
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+.contest-edition {
+  background: $text-color;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #2A265F
+}
+
+.contest-button {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+}
