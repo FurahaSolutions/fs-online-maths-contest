@@ -16,17 +16,20 @@ export interface IToken {
 }
 
 interface ITokenResponse {
-  token: IToken
-  user: IUser
+  token: IToken;
+  user: IUser;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private rememberMe = false;
-  private authUserSubject$ = new BehaviorSubject<IUser | null>(null);
+
+  authUserSubject$ = new BehaviorSubject<IUser | null>(null);
   authUser$ = this.authUserSubject$.asObservable();
+  private rememberMe = false;
+  constructor(private httpClient: HttpClient) {
+  }
   getStoredUser = (storageMethod: typeof localStorage | typeof sessionStorage) =>
     JSON.parse(String(storageMethod.getItem('token')));
 
@@ -35,19 +38,19 @@ export class AuthService {
   }
 
   getUserProfile = () => this.httpClient.get<IUser>('/user').pipe(
-    tap(this.authUserSubject$.next)
+    tap(this.authUserSubject$.next.bind(this.authUserSubject$)),
   );
 
   socialLogin = (socialUser: SocialUser) =>
     this.httpClient.post<ITokenResponse>('/login/social', socialUser).pipe(
-      tap(this.authenticateApp)
+      tap(this.authenticateApp.bind(this))
     );
   login = (data: { username: string; password: string }) =>
     this.httpClient.post<ITokenResponse>('/login', data);
 
-  authenticateApp = (response: ITokenResponse) => {
-    this.storeToken(response.token);
-    this.authUserSubject$.next(response.user);
+  authenticateApp = ({token, user}: ITokenResponse) => {
+    this.storeToken(token);
+    this.authUserSubject$.next(user);
   };
   storeToken = (token: IToken) => {
     if (this.rememberMe) {
@@ -69,6 +72,5 @@ export class AuthService {
     catchError(() => of(null)),
     tap(this.clearUser),
   );
-  constructor(private httpClient: HttpClient) {
-  }
+
 }

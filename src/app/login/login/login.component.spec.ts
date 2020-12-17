@@ -1,29 +1,31 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {LoginComponent} from './login.component';
-import {of} from 'rxjs';
 import {SocialAuthService, SocialLoginModule} from 'angularx-social-login';
 import {RouterTestingModule} from '@angular/router/testing';
 import {LoginFormComponent} from '../login-form/login-form.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from '../services/auth.service';
+import {mockAuthService, mockSocialAuthService} from '../../../test.mock';
+import {Router} from '@angular/router';
+import {DashboardComponent} from '../../dashboard/dashboard.component';
 
-const socialAuthServiceSpy: Partial<SocialAuthService> = {
-  authState: of(null),
-  signIn: () => new Promise(resolve => resolve(null)),
-  signOut: () => new Promise(resolve => resolve(null)),
-};
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let router: Router;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         SocialLoginModule,
         RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          {path: 'dashboard', component: DashboardComponent},
+        ]),
         FontAwesomeModule,
         HttpClientTestingModule,
         ReactiveFormsModule
@@ -32,11 +34,16 @@ describe('LoginComponent', () => {
       providers: [
         {
           provide: SocialAuthService,
-          useValue: socialAuthServiceSpy
+          useValue: mockSocialAuthService
+        },
+        {
+          provide: AuthService,
+          useValue: mockAuthService
         }
       ],
     })
       .compileComponents();
+    router = TestBed.inject(Router);
   }));
 
   beforeEach(() => {
@@ -50,8 +57,10 @@ describe('LoginComponent', () => {
   });
 
   it('should call signIn when signInWithGoogle() is called', () => {
+    spyOn(router, 'navigate').and.callThrough();
     const signInSpy = spyOn<any>((component as any).socialAuthService, 'signIn').and.callThrough();
     component.signInWithGoogle();
+
     expect(signInSpy).toHaveBeenCalled();
   });
 
@@ -66,4 +75,11 @@ describe('LoginComponent', () => {
     component.signOut();
     expect(signOutSpy).toHaveBeenCalled();
   });
+
+  // it('should navigate to "/dashboard" after successful login', () => {
+  //   const navigateSpy = spyOn(router, 'navigate').and.callThrough();
+  //   // const navigateSpy = spyOn<any>((component as any).router, 'navigate').and.callThrough();
+  //   component.signInWithFB();
+  //   expect(navigateSpy).toHaveBeenCalled();
+  // });
 });

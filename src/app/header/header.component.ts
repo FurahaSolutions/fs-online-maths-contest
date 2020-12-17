@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {titleMixin} from '../shared/mixins/title.mixin';
 import {AuthService} from '../login/services/auth.service';
 import {mergeMap} from 'rxjs/operators';
@@ -12,13 +12,14 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent extends titleMixin() {
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private ngZOne: NgZone) {
     super();
   }
 
   logout() {
     this.authService.logout().pipe(
-      mergeMap(() => from(this.router.navigate(['/login'])))
-    ).subscribe()
+      mergeMap(() =>
+        from(this.router.navigate(['/login'])))
+    ).subscribe();
   }
 }
