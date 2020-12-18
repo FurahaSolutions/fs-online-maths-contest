@@ -4,16 +4,17 @@
   <div class="d-flex flex-wrap justify-content-between align-self-stretch">
     <div *ngFor="let contest of contests$ | async" class="col-lg-6 p-1 d-flex flex-wrap">
 
-      <div class="col-8 pt-5 pb-4 d-flex align-items-center contest-name">
+      <div class="col-7 pt-5 pb-4 d-flex align-items-center contest-name">
         {{ contest.name }}
         <span class="contest-status">{{ contest.status | uppercase }}</span>
         <a class="contest-previous-link" [routerLink]="['/contests', contest.contestId]">View previous contests</a>
       </div>
-      <div class="col-4 p-0 d-flex align-items-center contest-edition">
-        <span class="pl-2">{{ contest.edition }}<sup>{{ contest.edition | ordinal }}</sup> Edition</span>
+      <div class="col-5 p-0 d-flex align-items-start flex-wrap contest-right">
+        <div class="col-12 contest-edition">{{ contest.edition }}<sup>{{ contest.edition | appOrdinal }}</sup> Edition</div>
+        <div class="col-12 contest-description" style="font-size: 0.9rem">{{ contest.shortDescription }}</div>
       </div>
 
-      <a [routerLink]="['/contests', contest.contestId, 'editions', contest.id]" class="btn btn-secondary bg-dark contest-button">View</a>
+      <a [routerLink]="['/contests', contest.contestId, 'editions', contest.id]" class="btn btn-secondary contest-button pr-4 pl-4">View</a>
     </div>
 
   </div>
