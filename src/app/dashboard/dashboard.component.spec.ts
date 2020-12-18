@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 import {HeaderComponent} from '../header/header.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {OrdinalModule} from '../shared/pipes/ordinal/ordinal.module';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -11,7 +12,7 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule,HttpClientTestingModule],
+      imports: [RouterTestingModule,HttpClientTestingModule, OrdinalModule],
       declarations: [ DashboardComponent, HeaderComponent ]
     })
     .compileComponents();

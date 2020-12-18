@@ -4,6 +4,7 @@ import {CommonModule} from '@angular/common';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
 import {HeaderModule} from '../header/header.module';
+import {OrdinalModule} from '../shared/pipes/ordinal/ordinal.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import {HeaderModule} from '../header/header.module';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    HeaderModule
+    HeaderModule,
+    OrdinalModule
   ]
 })
 export class DashboardModule {

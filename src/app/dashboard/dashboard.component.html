@@ -10,10 +10,10 @@
         <a class="contest-previous-link" [routerLink]="['/contests', contest.contestId]">View previous contests</a>
       </div>
       <div class="col-4 p-0 d-flex align-items-center contest-edition">
-        <span class="pl-2">3<sup>rd</sup> Edition</span>
+        <span class="pl-2">{{ contest.edition }}<sup>{{ contest.edition | ordinal }}</sup> Edition</span>
       </div>
 
-      <a [routerLink]="['/contests', contest.contestId, 'edition', 'edition', contest.id]" class="btn btn-secondary bg-dark contest-button">View</a>
+      <a [routerLink]="['/contests', contest.contestId, 'editions', contest.id]" class="btn btn-secondary bg-dark contest-button">View</a>
     </div>
 
   </div>

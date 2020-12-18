@@ -23,9 +23,17 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
+        path: 'contests',
+        pathMatch: 'full',
+        redirectTo:'dashboard'
+      },
+      {
         path: 'dashboard',
-        canActivate: [AuthGuard],
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'contests',
+        loadChildren: () => import('./contest/contest.module').then(m => m.ContestModule)
       }
     ]
   }
