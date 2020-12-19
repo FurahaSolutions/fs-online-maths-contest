@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
-import {Observable} from 'rxjs';
 import {ContestService} from '../shared/services/contest.service';
-import {IContest} from '../shared/interfaces/contest.interface';
 
 
 @Component({
@@ -10,7 +8,7 @@ import {IContest} from '../shared/interfaces/contest.interface';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  contests$: Observable<IContest[]> = this.contestService.featuredContests$;
+  contestEditions$ = this.contestService.getContestEditions({featured: true});
 
   constructor(private contestService: ContestService) {
   }
