@@ -59,14 +59,14 @@ describe('LoginComponent', () => {
   it('should call signIn when signInWithGoogle() is called', () => {
     spyOn(router, 'navigate').and.callThrough();
     const signInSpy = spyOn<any>((component as any).socialAuthService, 'signIn').and.callThrough();
-    component.signInWithGoogle();
+    fixture.ngZone.run(() => component.signInWithGoogle())
 
     expect(signInSpy).toHaveBeenCalled();
   });
 
   it('should call signIn when signInWithFb() is called', () => {
     const signInSpy = spyOn<any>((component as any).socialAuthService, 'signIn').and.callThrough();
-    component.signInWithFB();
+    fixture.ngZone.run( () => component.signInWithFB());
     expect(signInSpy).toHaveBeenCalled();
   });
 
@@ -75,11 +75,4 @@ describe('LoginComponent', () => {
     component.signOut();
     expect(signOutSpy).toHaveBeenCalled();
   });
-
-  // it('should navigate to "/dashboard" after successful login', () => {
-  //   const navigateSpy = spyOn(router, 'navigate').and.callThrough();
-  //   // const navigateSpy = spyOn<any>((component as any).router, 'navigate').and.callThrough();
-  //   component.signInWithFB();
-  //   expect(navigateSpy).toHaveBeenCalled();
-  // });
 });

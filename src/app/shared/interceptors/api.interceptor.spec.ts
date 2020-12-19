@@ -1,18 +1,10 @@
 import {getTestBed, inject, TestBed} from '@angular/core/testing';
 
 import {ApiInterceptor} from './api.interceptor';
-import {HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {Injectable} from '@angular/core';
+import {HttpTestingService} from '../../../test.mock';
 
-@Injectable()
-class HttpService {
-  constructor(private httpClient: HttpClient) {
-  }
-
-  getItem = (link: string) => this.httpClient.get(link);
-
-}
 
 describe('ApiInterceptor', () => {
   let injector;
@@ -23,7 +15,7 @@ describe('ApiInterceptor', () => {
         HttpClientTestingModule
       ],
       providers: [
-        HttpService,
+        HttpTestingService,
         {
           provide: 'apiBaseUrl',
           useValue: 'http://api/base'
@@ -42,7 +34,7 @@ describe('ApiInterceptor', () => {
 
   afterEach(() => httpMock.verify());
 
-  it('should have an intercept function() that appends base URL', inject([HttpService], (service: HttpService) => {
+  it('should have an intercept function() that appends base URL', inject([HttpTestingService], (service: HttpTestingService) => {
     service.getItem('/my-link').subscribe({
       next: (res) => {
         expect(res).toBeTruthy();
@@ -52,7 +44,7 @@ describe('ApiInterceptor', () => {
     expect(httpReq.request.url).toBe(`http://api/base/my-link`);
   }));
 
-  it('should have an not append base URL if http protocol is provided', inject([HttpService], (service: HttpService) => {
+  it('should have an not append base URL if http protocol is provided', inject([HttpTestingService], (service: HttpTestingService) => {
     service.getItem('https://api/base/my-link').subscribe({
       next: (res) => {
         expect(res).toBeTruthy();

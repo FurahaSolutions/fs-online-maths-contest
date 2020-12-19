@@ -6,6 +6,8 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 declare const require: {
   context(path: string, deep?: boolean, filter?: RegExp): {
