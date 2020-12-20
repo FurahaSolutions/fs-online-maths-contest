@@ -1,13 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {SocialUser} from 'angularx-social-login';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, take, tap} from 'rxjs/operators';
 import {BehaviorSubject, of} from 'rxjs';
+import {tokenMixin} from '../../shared/mixins/token.mixin';
 
 export interface IUser {
+  SocialPhotoLink: string;
   firstName: string;
   lastName: string;
   email: string;
+  name: string;
 }
 
 export interface IToken {
@@ -23,18 +26,15 @@ interface ITokenResponse {
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends tokenMixin() {
 
   authUserSubject$ = new BehaviorSubject<IUser | null>(null);
   authUser$ = this.authUserSubject$.asObservable();
   private rememberMe = false;
-  constructor(private httpClient: HttpClient) {
-  }
-  getStoredUser = (storageMethod: typeof localStorage | typeof sessionStorage) =>
-    JSON.parse(String(storageMethod.getItem('token')));
 
-  get storedToken(): IToken | null {
-    return this.getStoredUser(sessionStorage) || this.getStoredUser(localStorage);
+  constructor(private httpClient: HttpClient) {
+    super();
+    this.getUserProfile().pipe(take(1)).subscribe()
   }
 
   getUserProfile = () => this.httpClient.get<IUser>('/user').pipe(

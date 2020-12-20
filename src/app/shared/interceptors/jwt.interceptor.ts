@@ -1,20 +1,20 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {AuthService} from '../../login/services/auth.service';
+import {tokenMixin} from '../mixins/token.mixin';
 
 @Injectable()
-export class JwtInterceptor implements HttpInterceptor {
+export class JwtInterceptor extends tokenMixin() implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {
+  constructor() {
+    super();
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let storedToken = this.authService.storedToken;
-    if(storedToken) {
+    if (this.storedToken) {
       request = request.clone({
         setHeaders: {
-          ['Authorization']: `Bearer ${storedToken.accessToken}`
+          ['Authorization']: `Bearer ${this.storedToken.accessToken}`
         }
       });
     }

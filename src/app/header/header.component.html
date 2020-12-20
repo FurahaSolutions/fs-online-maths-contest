@@ -18,7 +18,8 @@
           </li>
 
         </ul>
-        <span><img src="" alt="">My Lovely Name</span>
+        <span class="ml-5" *ngIf="authUser$ | async as user">
+          <img class="img-fluid rounded-circle pr-1" width="25" [src]="user.SocialPhotoLink" alt="">{{ user.name | titlecase }}</span>
         <button class="btn btn-sm btn-outline-info ml-4" (click)="logout()">logout</button>
       </div>
     </div>
