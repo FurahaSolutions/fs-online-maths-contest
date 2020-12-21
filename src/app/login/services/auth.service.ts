@@ -6,7 +6,7 @@ import {BehaviorSubject, of} from 'rxjs';
 import {tokenMixin} from '../../shared/mixins/token.mixin';
 
 export interface IUser {
-  SocialPhotoLink: string;
+  socialPhotoLink: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -34,7 +34,7 @@ export class AuthService extends tokenMixin() {
 
   constructor(private httpClient: HttpClient) {
     super();
-    this.getUserProfile().pipe(take(1)).subscribe()
+    this.getUserProfile().pipe(take(1)).subscribe();
   }
 
   getUserProfile = () => this.httpClient.get<IUser>('/user').pipe(

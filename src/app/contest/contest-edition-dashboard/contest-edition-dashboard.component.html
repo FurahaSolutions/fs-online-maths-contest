@@ -4,14 +4,14 @@
   <div class="container-fluid">
     <div class="pl-2" style="border-left:80px blue solid ">
       <div>
-        <span style="font-family: Courgette,serif; font-size: 3rem">
+        <span style="font-family: Courgette,serif; font-size: 1.5rem">
           {{ contestEdition.contestName }}
           <span class="badge badge-secondary">{{ contestEdition.status }}</span>
         </span>
 
       </div>
       <div>
-        <span style="font-family: 'Kaushan Script',serif; font-size: 6rem">
+        <span style="font-family: 'Kaushan Script',serif; font-size: 3rem">
           {{ contestEdition.edition }}
           <sup>{{ contestEdition.edition | appOrdinal }}</sup> Edition
         </span>
@@ -19,6 +19,8 @@
         <p>{{ contestEdition.description }}</p>
         <h2>Event Date</h2>
         <p>{{ contestEdition.eventDateTime }}</p>
+        <h2>Events</h2>
+        <a *ngFor="let event of contestEdition.events" [routerLink]="['']" class="badge badge-success"></a>
       </div>
   </div>
 </div>

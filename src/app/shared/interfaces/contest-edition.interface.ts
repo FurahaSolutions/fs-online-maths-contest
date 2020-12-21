@@ -1,4 +1,7 @@
+import {IContestEditionEvent} from './contest-edition-event.interface';
+
 export interface IContestEdition {
+  events?: IContestEditionEvent[];
   eventDateTime?: string;
   id: number;
   name: string;
@@ -8,5 +11,5 @@ export interface IContestEdition {
   edition?: number;
   contestName?: string;
   contestDescription?: string;
-  createdAt?: string
+  createdAt?: string;
 }

@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <main class="container-fluid">
-  <form [formGroup]="searchForm">
+  <form *ngIf="searchFormValueChanges$ | async" [formGroup]="searchForm">
     <div class="d-flex flex-wrap align-items-center">
       <div class="col-lg-2">
         <div class="form-group">

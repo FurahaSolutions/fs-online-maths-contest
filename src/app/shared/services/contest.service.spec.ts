@@ -7,7 +7,7 @@ import {of} from 'rxjs';
 
 describe('ContestService', () => {
   let service: ContestService;
-  let httpClient: HttpClient
+  let httpClient: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,10 +23,13 @@ describe('ContestService', () => {
 
   describe('function getContestEditions()', () => {
     it('should return an Observable', done => {
-      spyOn(httpClient, 'get').and.returnValue(of([]))
+      spyOn(httpClient, 'get').and.returnValue(of({total: 0, data: []}));
       service.getContestEditions().subscribe({
-        next: res => expect(res).toEqual([])
-      })
+        next: res => {
+          expect(res).toEqual({total: 0, data: []});
+          done();
+        }
+      });
     });
-  })
+  });
 });
