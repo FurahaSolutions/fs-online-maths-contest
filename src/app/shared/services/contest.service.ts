@@ -12,13 +12,15 @@ interface IContestEditionResponse {
   providedIn: 'root'
 })
 export class ContestService {
+  constructor(private httpClient: HttpClient) {
+  }
   getContestEditions = ({page = 1, featured = false, size = 15} = {}) =>
     this.httpClient.get<IContestEditionResponse>(`/contest-editions/`, {
       params: {size: size.toString(), page: page.toString(), featured: featured.toString()}
     });
 
-  constructor(private httpClient: HttpClient) {
-  }
-
   getContestWithId = ({contestId}: { contestId: number }) => this.httpClient.get<IContest>(`/contests/${contestId}`);
+
+  getContestEditionWithId = ({contestEditionId}: { contestEditionId: number }) =>
+    this.httpClient.get<IContestEdition>(`/contest-editions/${contestEditionId}`);
 }

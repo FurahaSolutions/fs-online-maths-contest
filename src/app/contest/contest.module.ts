@@ -5,6 +5,7 @@ import { ContestRoutingModule } from './contest-routing.module';
 import { ContestDashboardComponent } from './contest-dashboard/contest-dashboard.component';
 import { ContestEditionDashboardComponent } from './contest-edition-dashboard/contest-edition-dashboard.component';
 import {HeaderModule} from '../header/header.module';
+import {OrdinalModule} from '../shared/pipes/ordinal/ordinal.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import {HeaderModule} from '../header/header.module';
   imports: [
     CommonModule,
     ContestRoutingModule,
-    HeaderModule
+    HeaderModule,
+    OrdinalModule
   ]
 })
 export class ContestModule { }

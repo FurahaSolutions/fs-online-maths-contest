@@ -1,4 +1,5 @@
 export interface IContestEdition {
+  eventDateTime?: string;
   id: number;
   name: string;
   contestId?: number;

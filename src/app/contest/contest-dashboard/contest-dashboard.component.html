@@ -2,8 +2,8 @@
 
 <div class="container-fluid" *ngIf="contestEditions$ | async as contestEditions">
   <h1>{{  contestEditions.name }}</h1>
-  <div class="d-flex justify-content-around">
-    <div *ngFor="let edition of contestEditions.editions" class="col-lg-5">
+  <div class="d-flex justify-content-around flex-wrap">
+    <div *ngFor="let edition of contestEditions.editions" class="col-lg-5 mt-1">
 
       <div class="card">
         <div class="card-header bg-primary">{{ edition.name }}</div>
