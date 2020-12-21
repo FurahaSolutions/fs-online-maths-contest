@@ -20,7 +20,16 @@
         <h2>Event Date</h2>
         <p>{{ contestEdition.eventDateTime }}</p>
         <h2>Events</h2>
-        <a *ngFor="let event of contestEdition.events" [routerLink]="['']" class="badge badge-success"></a>
+        <div class="d-flex flex-wrap justify-content-between">
+          <div *ngFor="let event of contestEdition.events"
+               class="col-lg-4">
+            <div class="card bg-dark p-3 mt-2">
+              {{event.name}}
+              <a class="btn btn-secondary" [routerLink]="['events', event.id]">Join Event</a>
+            </div>
+          </div>
+
+        </div>
       </div>
   </div>
 </div>
