@@ -59,7 +59,7 @@ describe('LoginComponent', () => {
   it('should call signIn when signInWithGoogle() is called', () => {
     spyOn(router, 'navigate').and.callThrough();
     const signInSpy = spyOn<any>((component as any).socialAuthService, 'signIn').and.callThrough();
-    fixture.ngZone.run(() => component.signInWithGoogle())
+    fixture.ngZone.run(() => component.signInWithGoogle());
 
     expect(signInSpy).toHaveBeenCalled();
   });

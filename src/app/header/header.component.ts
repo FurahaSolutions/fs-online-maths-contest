@@ -1,4 +1,4 @@
-import {Component, NgZone} from '@angular/core';
+import {Component} from '@angular/core';
 import {titleMixin} from '../shared/mixins/title.mixin';
 import {AuthService} from '../login/services/auth.service';
 import {mergeMap} from 'rxjs/operators';
@@ -11,8 +11,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent extends titleMixin() {
-
-  constructor(private authService: AuthService, private router: Router, private ngZOne: NgZone) {
+  authUser$ = this.authService.authUser$;
+  constructor(private authService: AuthService, private router: Router) {
     super();
   }
 

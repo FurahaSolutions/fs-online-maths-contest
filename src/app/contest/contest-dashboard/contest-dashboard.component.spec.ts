@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ContestDashboardComponent } from './contest-dashboard.component';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HeaderComponent} from '../../header/header.component';
 
 describe('ContestDashboardComponent', () => {
   let component: ContestDashboardComponent;
@@ -8,7 +11,8 @@ describe('ContestDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContestDashboardComponent ]
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [ ContestDashboardComponent, HeaderComponent ]
     })
     .compileComponents();
   });
