@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {IContestEdition} from '../interfaces/contest-edition.interface';
 import {IContest} from '../interfaces/contest.interface';
+import {IContestEditionEvent} from '../interfaces/contest-edition-event.interface';
 
 interface IContestEditionResponse {
   total: number;
@@ -23,4 +24,7 @@ export class ContestService {
 
   getContestEditionWithId = ({contestEditionId}: { contestEditionId: number }) =>
     this.httpClient.get<IContestEdition>(`/contest-editions/${contestEditionId}`);
+
+  getContestEditionEventWithId = ({eventId}: {eventId: 1}) =>
+    this.httpClient.get<IContestEditionEvent>(`/contest-edition-events/${eventId}`)
 }

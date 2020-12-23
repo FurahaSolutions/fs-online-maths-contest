@@ -1,0 +1,5 @@
+<app-header></app-header>
+<div *ngIf="event$ | async as event">
+  <pre class="text-light">{{ event | json }}</pre>
+  <button class="btn btn-success" [routerLink]="['test']">Join Event</button>
+</div>
