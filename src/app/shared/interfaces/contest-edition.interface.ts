@@ -1,4 +1,5 @@
 import {IContestEditionEvent} from './contest-edition-event.interface';
+import {IContestQuestion} from './contest-question.interface';
 
 export interface IContestEdition {
   events?: IContestEditionEvent[];

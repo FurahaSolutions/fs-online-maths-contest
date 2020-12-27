@@ -1,0 +1,12 @@
+<div [class.blink]="examEndedSubject$ | async" [class.text-danger]="danger$ | async"  [class.text-warning]="warn$ | async" class="timer" *ngIf="timer$ | async as timer">
+  <span class="digit">{{ timer.h[0]}}</span>
+  <span class="digit">{{ timer.h[1]}}</span>
+  <span>:</span>
+  <span class="digit">{{ timer.min[0]}}</span>
+  <span class="digit">{{ timer.min[1]}}</span>
+  <span>:</span>
+  <span class="digit">{{ timer.s[0]}}</span>
+  <span class="digit">{{ timer.s[1]}}</span>
+  <span *ngIf="examEndedSubject$ | async" class="text-danger message">Time's Up!</span>
+</div>
+{{ examEndedSubject$ | async }}

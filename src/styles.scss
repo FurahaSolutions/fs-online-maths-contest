@@ -4,6 +4,11 @@
 @import "https://fonts.googleapis.com/css?family=Courgette";
 @import "https://fonts.googleapis.com/css?family=Kaushan+Script";
 
+@font-face{
+  font-family:'digital-clock-font';
+  src: url('assets/fonts/font-digital.ttf');
+}
+
 body {
   background: #111111;
   color: white;

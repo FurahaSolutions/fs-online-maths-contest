@@ -1,0 +1,63 @@
+<div *ngIf="activeQuestion === itemIndex" class="card bg-dark mt-2 text-light p-2">
+  <section class="card-header d-flex flex-wrap justify-content-between align-items-center">
+    <section class="badge badge-primary">Qn:{{ itemIndex + 1 }} [{{ question.points | number:'1.1-1' }} points] <span
+      class="sr-only">Question {{ itemIndex + 1 }}</span>
+    </section>
+    <section>
+      <button type="button" class="btn btn-sm btn-secondary ml-2" (click)='activeQuestion = 1'
+              [disabled]='activeQuestion === 0'> <fa-icon [icon]="faArrowLeft"></fa-icon>
+        Previous</button>
+      <button (click)='activeQuestion = 1' [disabled]='true'
+              type="button" class="btn btn-sm btn-secondary ml-2">
+        Next<fa-icon [icon]="faArrowRight"></fa-icon>
+
+      </button>
+
+    </section>
+
+  </section>
+  <section class="card-body text-light">
+    <pre class="text-light">{{ question | json }}</pre>
+  </section>
+<!--  <div style="" class="d-flex">-->
+<!--    <div style="font-size: 1.8rem; font-family: Roboto,serif">-->
+<!--      A goat is tethered in one edge of a circular grazing field of radius 7. At what radius of the circle will the cow-->
+<!--      be able to eat half of the field?-->
+<!--      <p class="bg-light p-2">-->
+<!--        <svg width="173" height="172" xmlns="http://www.w3.org/2000/svg">-->
+<!--          <defs>-->
+<!--            &lt;!&ndash; clip path&ndash;&gt;-->
+<!--            <clipPath id="clip">-->
+<!--              <ellipse id="circle" ry="85" rx="85" cy="86" cx="86"/>-->
+<!--            </clipPath>-->
+
+<!--            &lt;!&ndash; gradient &ndash;&gt;-->
+<!--            <linearGradient id="gradient" x1="0" x2="0" y1="0" y2="1">-->
+<!--              <stop offset="0%" stop-color="#000"/>-->
+<!--              <stop offset="100%" stop-color="#fff"/>-->
+<!--            </linearGradient>-->
+<!--          </defs>-->
+<!--          <g>-->
+<!--            <title>background</title>-->
+<!--            <rect fill="none" id="canvas_background" height="175" width="175" y="-1" x="-1"/>-->
+<!--            <g display="none" overflow="visible" id="canvasGrid">-->
+<!--              <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>-->
+<!--            </g>-->
+<!--          </g>-->
+<!--          <g>-->
+<!--            <title>Layer 1</title>-->
+<!--            &lt;!&ndash; same shape of the gradient, adding stroke and fill &ndash;&gt;-->
+<!--            <use xlink:href="#circle" stroke="#000" stroke-width="1.5" fill="#fff"/>-->
+
+<!--            &lt;!&ndash; using clip path, same shape of above &ndash;&gt;-->
+<!--            <ellipse clip-path="url(#clip)" stroke="#000" ry="88" rx="88" id="svg_5" cy="88" cx="15" stroke-width="1.5"-->
+<!--                     fill="url(#gradient)"/>-->
+<!--            <line clip-path="url(#clip)" stroke="#000" stroke-linecap="round" stroke-linejoin="round" id="svg_3"-->
+<!--                  y2="170" x2="86" y1="2" x1="82" fill-opacity="null" stroke-opacity="null" stroke-width="1.5"-->
+<!--                  fill="none"/>-->
+<!--          </g>-->
+<!--        </svg>-->
+<!--      </p>-->
+<!--    </div>-->
+<!--  </div>-->
+</div>

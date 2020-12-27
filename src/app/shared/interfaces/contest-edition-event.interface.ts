@@ -1,3 +1,4 @@
+import {IContestQuestion} from './contest-question.interface';
 
 
 export interface IContestEditionEvent {
@@ -11,4 +12,6 @@ export interface IContestEditionEvent {
   contestEditionId?: string;
   contestId?: string;
   contestEventDateTime?: string;
+  eventPeriodInMinutes: number;
+  questions?: IContestQuestion[];
 }

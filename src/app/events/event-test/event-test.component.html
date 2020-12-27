@@ -1,14 +1,28 @@
-<div class="container-fluid">
-  <div class="d-flex">
-    <div class="col-lg-1">
-      <div>Q1</div>
-      <div>Q2</div>
-      <div>Q3</div>
-      <div>Q4</div>
-    </div>
-    <div style="font-size: 1.8rem; font-family: Roboto,serif">
-      A goat is tethered in one edge of a circular grazing field of radius 7.  At what radius of the circle will the cow be able to eat half of the field?
-    </div>
+<div class="container-fluid" *ngIf="v$ | async as v">
+  <div class="card bg-dark">
+    <header class="d-flex justify-content-between m-2">
+
+      <h1>{{v.contestEvent.contestEditionName}} - {{ v.contestEvent.name }}</h1>
+      <app-count-down-timer [minutes]="v.contestEvent.eventPeriodInMinutes"></app-count-down-timer>
+      <button class="btn btn-success">
+        Submit
+        <fa-icon [icon]="faPlay"></fa-icon>
+      </button>
+    </header>
   </div>
 
+  <section class='d-flex flex-wrap'>
+    <button style="min-width: 2.1rem;" [class.active]='true' type="button"
+            class="btn btn-secondary btn-sm ml-1 mt-1" *ngFor='let question of v.questionNumbers'
+             [attr.aria-label]='"Go to question" +  (question + 1)'>{{ question + 1}} </button>
+  </section>
+
+  <section>
+    <app-question-view
+      *ngFor="let question of v.contestEvent.questions; let i = index"
+      [active-question]="activeQuestion"
+      [item-index]="i"
+      [question]="question"
+    ></app-question-view>
+  </section>
 </div>

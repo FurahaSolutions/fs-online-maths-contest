@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {IContestEdition} from '../interfaces/contest-edition.interface';
 import {IContest} from '../interfaces/contest.interface';
 import {IContestEditionEvent} from '../interfaces/contest-edition-event.interface';
+import {of} from 'rxjs';
 
 interface IContestEditionResponse {
   total: number;
@@ -25,6 +26,12 @@ export class ContestService {
   getContestEditionWithId = ({contestEditionId}: { contestEditionId: number }) =>
     this.httpClient.get<IContestEdition>(`/contest-editions/${contestEditionId}`);
 
-  getContestEditionEventWithId = ({eventId}: {eventId: 1}) =>
+  getContestEditionEventWithId = ({eventId}: {eventId: number}) =>
     this.httpClient.get<IContestEditionEvent>(`/contest-edition-events/${eventId}`)
+
+  // getQuestionsForContestWithId({ eventId }) {
+  //   return of([
+  //     1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,26,27,28,29,30
+  //   ])
+  // }
 }
