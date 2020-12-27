@@ -12,9 +12,12 @@
   </div>
 
   <section class='d-flex flex-wrap'>
-    <button style="min-width: 2.1rem;" [class.active]='true' type="button"
-            class="btn btn-secondary btn-sm ml-1 mt-1" *ngFor='let question of v.questionNumbers'
-             [attr.aria-label]='"Go to question" +  (question + 1)'>{{ question + 1}} </button>
+    <button [style.minWidth]="question.size" type="button"
+            class="btn btn-secondary btn-sm ml-1 mt-1" *ngFor='let question of v.questionNumbers; let i = index'
+            (click)="activeQuestion = i"
+            [class.active]='activeQuestion === i'
+             [attr.title]='"Go to question " +  (question.position) + "(" + question.points +" points)"'
+             [attr.aria-label]='"Go to question " +  (question.position)'>{{ question.position }} </button>
   </section>
 
   <section>
@@ -24,5 +27,6 @@
       [item-index]="i"
       [question]="question"
     ></app-question-view>
+
   </section>
 </div>

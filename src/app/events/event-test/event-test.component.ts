@@ -19,8 +19,13 @@ export class EventTestComponent {
   );
 
   questionNumbers$ = this.contestEvent$.pipe(
-    map(({questions}) => Object.keys(questions)),
-    map(questions => questions.map(question => Number(question)))
+    map(({questions}) => questions.map(({points}, key) => {
+      return ({
+        position: key + 1,
+        points: points,
+        size: 2.5 * points / Math.min(...questions.map(({points}) => points)) + 'rem'
+      })
+    }))
   )
   v$ = combineLatest([this.contestEvent$, this.questionNumbers$]).pipe(
     map(([contestEvent,questionNumbers]) => ({

@@ -6,3 +6,18 @@
   line-height: 1rem;
   height: 1.6rem;;
 }
+
+.card {
+  animation-name: card;
+  animation-duration: 0.5s;
+  transition-duration: 0.5s;
+}
+
+@keyframes card {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

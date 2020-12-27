@@ -19,6 +19,28 @@
   <section class="card-body text-light">
     <pre class="text-light">{{ question | json }}</pre>
   </section>
+
+  <section class="card-body mb-0 choices">
+    <section class="pb-2 border-bottom">
+      <div [appMath]="{latex: question.description }"></div>
+      <section>
+        <span *ngFor='let tag of question.tags; let j = index'
+              class="badge badge-secondary p-1 mr-2 mb-2 pl-2 pr-2">{{ tag }}</span>
+      </section>
+    </section>
+    <fieldset class="bg-dark mt-1">
+      <legend>Choices</legend>
+      <span>[Please select]</span>
+      <ul class="list-group ">
+        <li *ngFor='let answer of question.answers; let k = index' class="list-group-item list-group-flush bg-dark">
+          {{ k | number2Alphabet }}. {{ answer.description }}
+        </li>
+      </ul>
+
+    </fieldset>
+  </section>
+
+
 <!--  <div style="" class="d-flex">-->
 <!--    <div style="font-size: 1.8rem; font-family: Roboto,serif">-->
 <!--      A goat is tethered in one edge of a circular grazing field of radius 7. At what radius of the circle will the cow-->
