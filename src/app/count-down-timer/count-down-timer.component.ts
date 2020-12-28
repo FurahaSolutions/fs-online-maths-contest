@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {BehaviorSubject, Subject, timer} from 'rxjs';
-import {map, switchMap, takeUntil, tap} from 'rxjs/operators';
+import {map, repeatWhen, switchMap, takeUntil, takeWhile, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-count-down-timer',
