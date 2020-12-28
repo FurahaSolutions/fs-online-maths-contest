@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {ComponentFixture, discardPeriodicTasks, fakeAsync, TestBed, waitForAsync} from '@angular/core/testing';
 
 import {DashboardComponent} from './dashboard.component';
 import {HeaderComponent} from '../header/header.component';
@@ -56,6 +56,6 @@ describe('DashboardComponent', () => {
         done();
       }
     });
-    component.searchForm.setValue({ size: 4, featured: true, page: 1})
+    component.searchForm.setValue({size: 4, featured: true, page: 1});
   });
 });

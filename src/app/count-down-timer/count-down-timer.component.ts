@@ -48,10 +48,12 @@ export class CountDownTimerComponent {
         s: (seconds % 60)
       })),
       map(({h, min, s}) => ({
-        h: h > 9 ? h.toString() : '0' + h.toString(),
-        min: min > 9 ? min.toString() : '0' + min.toString(),
-        s: s > 9 ? s.toString() : '0' + s.toString(),
+        h: h.toString().padStart(2, '0'),
+        min: min.toString().padStart(2, '0'),
+        s: s.toString().padStart(2, '0'),
       })),
     ))
   );
+
+
 }

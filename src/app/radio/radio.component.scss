@@ -1,0 +1,43 @@
+
+.radio-container {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  font-size: 1.2rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+/* Hide the browser's default radio */
+.radio-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+/* When the radio is checked, add a blue background */
+.radio-container input ~ .icon-radio {
+  display: none;
+}
+
+.radio-container input:checked ~ .icon-radio {
+  display: inline-block;
+}
+.radio-container input:checked ~ .icon-radio-empty {
+  display: inline-block;
+}
+
+.radio-container input:checked ~ .icon-radio-empty {
+  display: none;
+}
+.radio-container input:focus ~ .radio-mark {
+  margin: 0 !important;
+}
+label {
+  margin-bottom: 0 !important;
+
+}
+

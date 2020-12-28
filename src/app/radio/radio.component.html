@@ -1,0 +1,12 @@
+<label (click)="clickHandler()" class="radio-container">
+  <input type="radio" [checked]="value">
+  <span>{{ itemIndex | number2Alphabet }} </span>
+  <span class="radio-mark icon-radio">
+    <fa-icon [icon]="faCheckCircle"></fa-icon>
+  </span>
+  <span class="radio-mark icon-radio-empty">
+    <fa-icon [icon]="faCircle"></fa-icon>
+  </span>
+
+  <span class="ml-3 label"> <ng-content></ng-content></span>
+</label>

@@ -6,8 +6,8 @@ import {OnDestroy} from '@angular/core';
 export const unsubscribeMixin = <T extends Constructor>(baseClass: T = class {
 } as T) =>
   class extends baseClass implements OnDestroy{
-    destroyed$ = new Subject()
+    destroyed$ = new Subject();
     ngOnDestroy() {
-      this.destroyed$.next()
+      this.destroyed$.next();
     }
   };

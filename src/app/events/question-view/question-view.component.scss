@@ -9,8 +9,8 @@
 
 .card {
   animation-name: card;
-  animation-duration: 0.5s;
-  transition-duration: 0.5s;
+  animation-duration: 1s;
+  transition-duration: 1s;
 }
 
 @keyframes card {
@@ -20,4 +20,28 @@
   100% {
     opacity: 1;
   }
+}
+
+.choices .bg-secondary,.choices .bg-dark {
+  background: rgba(85, 85, 85, 0.3) none !important;
+}
+.border-bottom {
+  border-bottom: rgba(173, 216, 230, 0.1) solid !important;
+}
+.tags .close {
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.active-li {
+  box-shadow: rgba(98,181,219,0.8) 1px 1px 4px 4px;
+  animation-name: active-li;
+  animation-duration: 2s;
+}
+
+@keyframes active-li {
+  0% {  box-shadow: rgba(98,181,219,0) 1px 1px 4px 4px;}
+  50% { box-shadow: rgba(98,181,219,0.8) 1px 1px 4px 4px;}
 }

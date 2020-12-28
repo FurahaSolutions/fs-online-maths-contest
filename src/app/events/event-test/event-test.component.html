@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="v$ | async as v">
+<form (submit)="submitContest()" class="container-fluid" *ngIf="v$ | async as v" [formGroup]="questionsForm">
   <div class="card bg-dark">
     <header class="d-flex justify-content-between m-2">
 
@@ -12,21 +12,25 @@
   </div>
 
   <section class='d-flex flex-wrap'>
+
     <button [style.minWidth]="question.size" type="button"
             class="btn btn-secondary btn-sm ml-1 mt-1" *ngFor='let question of v.questionNumbers; let i = index'
             (click)="activeQuestion = i"
             [class.active]='activeQuestion === i'
-             [attr.title]='"Go to question " +  (question.position) + "(" + question.points +" points)"'
-             [attr.aria-label]='"Go to question " +  (question.position)'>{{ question.position }} </button>
-  </section>
+            [attr.title]='"Go to question " +  (question.position) + "(" + question.points +" points)"'
+            [attr.aria-label]='"Go to question " +  (question.position)'
+            [class.btn-success]="choices.controls[i].value.selected"
 
-  <section>
+    >{{ question.position }} </button>
+  </section>
+  <section formArrayName="choices">
     <app-question-view
-      *ngFor="let question of v.contestEvent.questions; let i = index"
+      *ngFor="let question of v.questions; let i = index"
       [active-question]="activeQuestion"
       [item-index]="i"
       [question]="question"
+      [formControlName]="i"
     ></app-question-view>
 
   </section>
-</div>
+</form>

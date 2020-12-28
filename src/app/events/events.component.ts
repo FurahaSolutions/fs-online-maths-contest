@@ -13,7 +13,7 @@ export class EventsComponent {
   event$ = this.activatedRoute.paramMap.pipe(
     map(params => ({eventId: Number(params.get('eventId'))})),
     mergeMap(this.contestService.getContestEditionEventWithId)
-  )
+  );
   constructor(
     private activatedRoute: ActivatedRoute,
     private contestService: ContestService) {

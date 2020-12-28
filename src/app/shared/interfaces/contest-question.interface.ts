@@ -1,6 +1,8 @@
+import {IQuestionChoice} from './question-choice.interface';
+
 export interface IContestQuestion {
-  answers: any[];
-  tags: string[];
+  choices: IQuestionChoice[];
+  tags?: string[];
   description: string;
   id: number;
   points: number;

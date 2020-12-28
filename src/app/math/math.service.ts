@@ -21,7 +21,7 @@ export class MathService {
 
   constructor() {
     this.notifier = new ReplaySubject<boolean>();
-    window.hubReady = this.notifier; // as said, bind to window object
+    window.hubReady = this.notifier;
   }
 
   ready(): Observable<boolean> {
@@ -29,16 +29,30 @@ export class MathService {
   }
 
   render(element: HTMLElement, math?: MathContent): void {
-    if (math) {
-      if (math.latex) {
-        element.innerText = this.removeTrailingBrackets(math.latex);
-      } else {
-        element.innerHTML = this.removeTrailingBrackets(math.mathml ? math.mathml : '');
-      }
-    }
 
-    MathJax?.Hub?.Queue(['Typeset', MathJax?.Hub, element]);
+    if (math?.latex) {
+      element.innerText = this.removeTrailingBrackets(math.latex);
+    } else if (math?.mathml) {
+      element.innerHTML = this.removeTrailingBrackets(math.mathml);
+    } else if (math) {
+      element.innerHTML = this.removeTrailingBrackets('');
+    } else {
+      element.innerText = '';
+    }
+    MathJax.Hub?.Queue(['Typeset', MathJax.Hub, element]);
+    // if (math) {
+    //   if (math.latex) {
+    //     element.innerText = this.removeTrailingBrackets(math.latex);
+    //   } else {
+    //     element.innerHTML = this.removeTrailingBrackets(math.mathml ? math.mathml : '');
+    //   }
+    // }
+    // this.renderQueue(element)
   }
+
+  // renderQueue(element: HTMLElement) {
+  //   MathJax.Hub.Queue(['Typeset', MathJax.Hub, element]);
+  // }
 
   removeTrailingBrackets(value: string): string {
     return value.replace('>\\\(', '>').replace('\\\)<', '<');

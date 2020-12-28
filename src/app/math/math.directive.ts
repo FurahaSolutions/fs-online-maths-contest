@@ -1,6 +1,6 @@
 import {Directive, ElementRef, Input, OnInit} from '@angular/core';
 import {MathContent, MathService} from './math.service';
-import {take, takeUntil} from 'rxjs/operators';
+import {take, takeUntil, tap} from 'rxjs/operators';
 import {unsubscribeMixin} from '../shared/mixins/unsubscribe.mixin';
 
 @Directive({
@@ -10,19 +10,19 @@ export class MathDirective extends unsubscribeMixin() implements OnInit {
 
   @Input()
   private appMath: MathContent;
-  private readonly _el: HTMLElement;
+  private readonly elNativeElement: HTMLElement;
 
-  constructor(private service: MathService, private el: ElementRef) {
+  constructor(private mathService: MathService, private el: ElementRef) {
     super();
-    this._el = el.nativeElement as HTMLElement;
+    this.elNativeElement = el.nativeElement as HTMLElement;
   }
 
   ngOnInit(): void {
-    this.service.ready().pipe(
+
+    this.mathService.ready().pipe(
       take(1),
-      takeUntil(this.destroyed$)
-    ).subscribe(_res => {
-      this.service.render(this._el, this.appMath);
-    });
+      takeUntil(this.destroyed$),
+      tap(() => this.mathService.render(this.elNativeElement, this.appMath))
+    ).subscribe();
   }
 }
