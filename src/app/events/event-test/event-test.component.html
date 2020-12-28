@@ -25,11 +25,14 @@
   </section>
   <section formArrayName="choices">
     <app-question-view
-      *ngFor="let question of v.questions; let i = index"
+      *ngFor="let question of v.questions; let firstItemIndex = first; let i = index; let lastItemIndex = last"
       [active-question]="activeQuestion"
+      [first-question]="firstItemIndex"
+      [last-question]="lastItemIndex"
       [item-index]="i"
       [question]="question"
       [formControlName]="i"
+      (question-change)="activeQuestion = activeQuestion + $event"
     ></app-question-view>
 
   </section>

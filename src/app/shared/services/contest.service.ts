@@ -3,7 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {IContestEdition} from '../interfaces/contest-edition.interface';
 import {IContest} from '../interfaces/contest.interface';
 import {IContestEditionEvent} from '../interfaces/contest-edition-event.interface';
-import {of} from 'rxjs';
 
 interface IContestEditionResponse {
   total: number;
@@ -16,6 +15,7 @@ interface IContestEditionResponse {
 export class ContestService {
   constructor(private httpClient: HttpClient) {
   }
+
   getContestEditions = ({page = 1, featured = false, size = 15} = {}) =>
     this.httpClient.get<IContestEditionResponse>(`/contest-editions/`, {
       params: {size: size.toString(), page: page.toString(), featured: featured.toString()}
@@ -26,10 +26,12 @@ export class ContestService {
   getContestEditionWithId = ({contestEditionId}: { contestEditionId: number }) =>
     this.httpClient.get<IContestEdition>(`/contest-editions/${contestEditionId}`);
 
-  getContestEditionEventWithId = ({eventId}: {eventId: number}) =>
+  getContestEditionEventWithId = ({eventId}: { eventId: number }) =>
     this.httpClient.get<IContestEditionEvent>(`/contest-edition-events/${eventId}`);
 
-  submitContest(data) {
-    return this.httpClient.post('/contest-question-answers', data);
+  submitContest({contestEventId, data}) {
+    return this.httpClient.post(
+      `/contest-edition-events/${contestEventId}/question-answers`,
+      data.map(({id: questionId, selected: answerId}) => ({questionId, answerId})));
   }
 }

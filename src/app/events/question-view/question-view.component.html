@@ -1,15 +1,15 @@
-<div *ngIf="activeQuestion === itemIndex" class="card bg-dark mt-2 text-light p-2">
+<div [hidden]="activeQuestion !== itemIndex" class="card bg-dark mt-2 text-light p-2">
   <section class="card-header d-flex flex-wrap justify-content-between align-items-center">
     <section class="badge badge-primary">Qn:{{ itemIndex + 1 }} [{{ question.points | number:'1.1-1' }} points] <span
       class="sr-only">Question {{ itemIndex + 1 }}</span>
     </section>
     <section>
-      <button type="button" class="btn btn-sm btn-secondary ml-2" (click)='activeQuestion = 1'
-              [disabled]='activeQuestion === 0'>
+      <button type="button" class="btn btn-sm btn-secondary ml-2" (click)='activeQuestionChange(-1)'
+              [disabled]='firstQuestion'>
         <fa-icon [icon]="faArrowLeft"></fa-icon>
         Previous
       </button>
-      <button (click)='activeQuestion = 1' [disabled]='true'
+      <button (click)='activeQuestionChange(1)' [disabled]='lastQuestion'
               type="button" class="btn btn-sm btn-secondary ml-2">
         Next
         <fa-icon [icon]="faArrowRight"></fa-icon>
@@ -20,7 +20,7 @@
 
   </section>
   <section class="card-body mb-0 choices">
-    <section class="pb-2 border-bottom mb-2">
+    <section class="pb-2 border-bottom mb-2 question">
       <div [appMath]="{latex: question.description }"></div>
       <section>
         <span *ngFor='let tag of question.tags; let j = index'
@@ -35,6 +35,7 @@
         <li *ngFor='let answer of question.choices; let k = index'
             class="list-group-item list-group-flush bg-dark"
             [class.active-li]="choices[k]"
+            [style.animation-delay]="(k * 0.1 +0.1) + 's'"
         >
           <app-radio [(ngModel)]="choices[k]" [item-index]="k" (change)="selectChoice(k)">
             {{ answer.description }}

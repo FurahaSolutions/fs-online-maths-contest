@@ -7,18 +7,22 @@
   height: 1.6rem;;
 }
 
-.card {
-  animation-name: card;
-  animation-duration: 1s;
-  transition-duration: 1s;
+.question {
+  font-size: 1.4rem;
+  animation-name: question-keyframe;
+  animation-duration: 0.7s;
+  transition-duration: 0.7s;
+  font-family: Ubuntu, sans-serif;
 }
 
-@keyframes card {
+@keyframes question-keyframe {
   0% {
     opacity: 0;
+    transform: translateY(-20px);
   }
   100% {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -36,12 +40,28 @@
 }
 
 .active-li {
-  box-shadow: rgba(98,181,219,0.8) 1px 1px 4px 4px;
   animation-name: active-li;
-  animation-duration: 2s;
+  animation-duration: 1s;
+  opacity: 1;
+  animation-fill-mode: forwards;
 }
 
 @keyframes active-li {
   0% {  box-shadow: rgba(98,181,219,0) 1px 1px 4px 4px;}
-  50% { box-shadow: rgba(98,181,219,0.8) 1px 1px 4px 4px;}
+  100% { box-shadow: rgba(98,181,219,0.8) 1px 1px 4px 4px;}
+}
+
+li {
+  opacity: 0;
+  animation: fadeIn 0.4s 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1.0;
+  }
 }

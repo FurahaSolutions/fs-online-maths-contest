@@ -1,23 +1,27 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {map, mergeMap, tap} from 'rxjs/operators';
+import {exhaustMap, map, mergeMap, takeUntil, tap} from 'rxjs/operators';
 import {ContestService} from '../../shared/services/contest.service';
 import {combineLatest} from 'rxjs';
 import {faPlay} from '@fortawesome/free-solid-svg-icons/faPlay';
 import {FormArray, FormBuilder} from '@angular/forms';
+import {unsubscribeMixin} from '../../shared/mixins/unsubscribe.mixin';
 
 @Component({
   selector: 'app-event-test',
   templateUrl: './event-test.component.html',
   styleUrls: ['./event-test.component.scss']
 })
-export class EventTestComponent {
+export class EventTestComponent extends unsubscribeMixin() {
   faPlay = faPlay;
   questionsForm = this.fb.group({
     choices: this.fb.array([])
   });
-  contestEvent$ = this.activatedRoute$.paramMap.pipe(
-    map(params => Number(params.get('eventId'))),
+
+  contestEventId$ = this.activatedRoute$.paramMap.pipe(
+    map(params => Number(params.get('eventId')))
+  );
+  contestEvent$ = this.contestEventId$.pipe(
     mergeMap(eventId =>
       this.contestService.getContestEditionEventWithId({eventId}))
   );
@@ -61,9 +65,17 @@ export class EventTestComponent {
     private contestService: ContestService,
     private fb: FormBuilder
   ) {
+    super();
   }
 
   submitContest() {
-    this.contestService.submitContest(this.choices.value).subscribe();
+
+    this.contestEventId$.pipe(
+      exhaustMap(contestEventId => this.contestService.submitContest({
+        contestEventId,
+        data: this.choices.value
+      })),
+      takeUntil(this.destroyed$)
+    ).subscribe();
   }
 }

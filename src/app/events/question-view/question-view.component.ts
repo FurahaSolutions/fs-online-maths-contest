@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
 import {IContestQuestion} from '../../shared/interfaces/contest-question.interface';
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons/faArrowRight';
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons/faArrowLeft';
@@ -25,10 +25,16 @@ export class QuestionViewComponent implements OnInit, ControlValueAccessor {
 
   // eslint-disable-next-line
   @Input('active-question') activeQuestion;
-
+  // eslint-disable-next-line
+  @Input('first-question') firstQuestion;
+  // eslint-disable-next-line
+  @Input('last-question') lastQuestion;
   // eslint-disable-next-line
   @Input('item-index') itemIndex;
   @Input() question: IContestQuestion;
+
+  // eslint-disable-next-line
+  @Output('question-change') questionChange = new EventEmitter()
   faArrowRight = faArrowRight;
   faArrowLeft = faArrowLeft;
   choices: boolean[];
@@ -59,4 +65,7 @@ export class QuestionViewComponent implements OnInit, ControlValueAccessor {
     this.value = value;
   }
 
+  activeQuestionChange(step: number) {
+    this.questionChange.emit(step)
+  }
 }
