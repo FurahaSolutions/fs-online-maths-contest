@@ -23,7 +23,7 @@ export class EventTestComponent extends unsubscribeMixin() {
   );
   contestEvent$ = this.contestEventId$.pipe(
     mergeMap(eventId =>
-      this.contestService.getContestEditionEventWithId({eventId}))
+      this.contestService.getContestEditionEventWithId({eventId, includeQuestions: true}))
   );
   questions$ = this.contestEvent$.pipe(
     map(({questions}) => questions),

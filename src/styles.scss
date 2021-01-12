@@ -16,3 +16,13 @@ body {
   color: white;
   font-family: "Lora", serif;
 }
+
+$a-color: #00c7ff;
+a {
+  color: $a-color;
+
+}
+a:hover {
+  color: lighten($a-color, 25%);
+  text-decoration: none;
+}
