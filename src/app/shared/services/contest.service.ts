@@ -44,7 +44,6 @@ export class ContestService {
       {params: {includeQuestions: String(+includeQuestions)}});
 
   submitContest({contestEventId, data}) {
-    alert('ok');
     return this.httpClient.post(
       `/contest-edition-events/${contestEventId}/question-answers`,
       data.map(({id: questionId, selected: answerId}) => ({questionId, answerId})));
