@@ -14,4 +14,5 @@ export interface IContestEditionEvent {
   contestEventDateTime?: string;
   eventPeriodInMinutes: number;
   questions?: IContestQuestion[];
+  totalPoints?: number;
 }

@@ -9,6 +9,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {ApiInterceptor} from './shared/interceptors/api.interceptor';
 import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
+import {LoaderModule} from './loader/loader.module';
+import {NetworkLoadingInterceptor} from './shared/interceptors/network-loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,10 +21,12 @@ import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
     AppRoutingModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    LoaderModule
   ],
   providers: [
     { provide: 'apiBaseUrl', useValue: environment.apiBaseUrl },
+    { provide: HTTP_INTERCEPTORS, useClass: NetworkLoadingInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
