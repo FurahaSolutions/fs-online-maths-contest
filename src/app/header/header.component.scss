@@ -1,5 +1,7 @@
+
+@import "src/styles/variables";
 header, nav {
-  height: 2.5rem;
+  height: $header-height;
   font-size: 0.8rem;
 }
 header {

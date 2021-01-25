@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {IContestEdition} from '../interfaces/contest-edition.interface';
 import {IContest} from '../interfaces/contest.interface';
 import {IContestEditionEvent} from '../interfaces/contest-edition-event.interface';
-import {shareReplay} from 'rxjs/operators';
+import {map, shareReplay} from 'rxjs/operators';
 
 interface IContestEditionResponse {
   total: number;
@@ -14,8 +14,10 @@ interface ILeaderBoard {
   userId: number;
   firstName: string;
   lastName: string;
-  points: number
+  points: number;
+  percentage: number;
 }
+
 interface ILeaderBoardResponse {
   event: IContestEditionEvent,
   leaderboard: ILeaderBoard[]
@@ -52,7 +54,12 @@ export class ContestService {
   getLeaderboardForEvent({eventId}) {
     return this.httpClient
       .get<ILeaderBoardResponse>(`/contest-edition-events/${eventId}/leaderboard/`).pipe(
+        map(res => ({
+          ...res, leaderboard: res.leaderboard.map(
+            (leaderboard) => ({...leaderboard, percentage: leaderboard.points / res.event.totalPoints})
+          )
+        })),
         shareReplay()
-      )
+      );
   }
 }
