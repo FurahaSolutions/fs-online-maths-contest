@@ -1,0 +1,48 @@
+<div [hidden]="activeQuestion !== itemIndex" class="card bg-dark mt-2 text-light p-2">
+  <section class="card-header d-flex flex-wrap justify-content-between align-items-center">
+    <section class="badge badge-primary">Qn:{{ itemIndex + 1 }} [{{ question.points | number:'1.1-1' }} points] <span
+      class="sr-only">Question {{ itemIndex + 1 }}</span>
+    </section>
+    <section>
+      <button type="button" class="btn btn-sm btn-secondary ml-2" (click)='activeQuestionChange(-1)'
+              [disabled]='firstQuestion'>
+        <fa-icon [icon]="faArrowLeft"></fa-icon>
+        Previous
+      </button>
+      <button (click)='activeQuestionChange(1)' [disabled]='lastQuestion'
+              type="button" class="btn btn-sm btn-secondary ml-2">
+        Next
+        <fa-icon [icon]="faArrowRight"></fa-icon>
+
+      </button>
+
+    </section>
+
+  </section>
+  <section class="card-body mb-0 choices">
+    <section class="pb-2 border-bottom mb-2 question">
+      <div [appMath]="{latex: question.description }"></div>
+      <section>
+        <span *ngFor='let tag of question.tags; let j = index'
+              class="badge badge-secondary p-1 mr-2 mb-2 pl-2 pr-2">{{ tag }}</span>
+      </section>
+    </section>
+    <fieldset class="bg-dark mt-1 p-2">
+      <legend>Choices</legend>
+      <span>[Please select]</span>
+      <ul class="list-group ">
+
+        <li *ngFor='let answer of question.choices; let k = index'
+            class="list-group-item list-group-flush bg-dark"
+            [class.active-li]="choices[k]"
+            [style.animation-delay]="(k * 0.1 +0.1) + 's'"
+        >
+          <app-radio [(ngModel)]="choices[k]" [item-index]="k" (change)="selectChoice(k)">
+            {{ answer.description }}
+          </app-radio>
+        </li>
+      </ul>
+
+    </fieldset>
+  </section>
+</div>

@@ -1,0 +1,39 @@
+<form (submit)="submitContest()" class="container-fluid" *ngIf="v$ | async as v" [formGroup]="questionsForm">
+  <div class="card bg-dark">
+    <header class="d-flex justify-content-between m-2">
+
+      <h1>{{v.contestEvent.contestEditionName}} - {{ v.contestEvent.name }}</h1>
+      <app-count-down-timer [minutes]="v.contestEvent.eventPeriodInMinutes"></app-count-down-timer>
+      <button class="btn btn-success">
+        Submit
+        <fa-icon [icon]="faPlay"></fa-icon>
+      </button>
+    </header>
+  </div>
+
+  <section class='d-flex flex-wrap'>
+
+    <button [style.minWidth]="question.size" type="button"
+            class="btn btn-secondary btn-sm ml-1 mt-1" *ngFor='let question of v.questionNumbers; let i = index'
+            (click)="activeQuestion = i"
+            [class.active]='activeQuestion === i'
+            [attr.title]='"Go to question " +  (question.position) + "(" + question.points +" points)"'
+            [attr.aria-label]='"Go to question " +  (question.position)'
+            [class.btn-success]="choices.controls[i].value.selected"
+
+    >{{ question.position }} </button>
+  </section>
+  <section formArrayName="choices">
+    <app-question-view
+      *ngFor="let question of v.questions; let firstItemIndex = first; let i = index; let lastItemIndex = last"
+      [active-question]="activeQuestion"
+      [first-question]="firstItemIndex"
+      [last-question]="lastItemIndex"
+      [item-index]="i"
+      [question]="question"
+      [formControlName]="i"
+      (question-change)="activeQuestion = activeQuestion + $event"
+    ></app-question-view>
+
+  </section>
+</form>

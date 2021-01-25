@@ -46,7 +46,18 @@
       "extends": [
         "plugin:@angular-eslint/template/recommended"
       ],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/member-delimiter-style": ["error", {
+          "multiline": {
+            "delimiter": "semi",
+            "requireLast": false
+          },
+          "singleline": {
+            "delimiter": "semi",
+            "requireLast": false
+          }
+        }]
+      }
     }
   ]
 }

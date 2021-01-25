@@ -11,7 +11,7 @@ export class GuestGuard implements CanActivate {
 
   canActivate(): Promise<boolean | UrlTree> | boolean {
     if (!!this.authService.storedToken) {
-      return this.ngZone.run(() => this.router.navigate(['/dashboard']));
+      return this.router.navigate(['/dashboard']);
     }
     return true;
   }

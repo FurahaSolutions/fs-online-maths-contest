@@ -25,7 +25,7 @@ const routes: Routes = [
       {
         path: 'contests',
         pathMatch: 'full',
-        redirectTo:'dashboard'
+        redirectTo: 'dashboard'
       },
       {
         path: 'dashboard',
@@ -34,6 +34,15 @@ const routes: Routes = [
       {
         path: 'contests',
         loadChildren: () => import('./contest/contest.module').then(m => m.ContestModule)
+      },
+      {
+        path: 'events',
+        pathMatch: 'full',
+        redirectTo: 'dashboard'
+      },
+      {
+        path: 'events',
+        loadChildren: () => import('./events/events.module').then(m => m.EventsModule)
       }
     ]
   }

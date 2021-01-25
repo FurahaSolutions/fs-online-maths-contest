@@ -5,6 +5,7 @@ import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AuthService} from '../../login/services/auth.service';
 import {Router} from '@angular/router';
+import {DashboardComponent} from '../../dashboard/dashboard.component';
 
 describe('AuthGuard', () => {
   let guard: AuthGuard;
@@ -13,7 +14,9 @@ describe('AuthGuard', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule]
+      imports: [HttpClientTestingModule, RouterTestingModule.withRoutes([
+        { path: 'dashboard', component:DashboardComponent}
+      ])]
     });
     guard = TestBed.inject(AuthGuard);
     authService = TestBed.inject(AuthService);

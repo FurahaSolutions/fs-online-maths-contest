@@ -1,7 +1,9 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
-@Pipe({ name: 'ordinal' })
+@Pipe({name: 'appOrdinal'})
 export class OrdinalPipe implements PipeTransform {
-  transform = (value: number): string => (["st", "nd", "rd"][((value + 90) % 100 - 10) % 10 - 1] || "th")
+  transform(value: number): string {
+    return (['st', 'nd', 'rd'][((value + 90) % 100 - 10) % 10 - 1] || 'th');
+  }
 }
 

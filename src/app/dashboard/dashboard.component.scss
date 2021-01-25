@@ -1,9 +1,10 @@
 $bg-color: #2A265F;
 $text-color: lighten($bg-color, 50%);
+$border-radius: 15px;
 
 .contest-name {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: $border-radius;
+  border-bottom-left-radius: $border-radius;
   min-height: 8rem;
   background: $bg-color;
   font-size: 1.6rem;
@@ -27,15 +28,22 @@ $text-color: lighten($bg-color, 50%);
   font-size: 0.8rem;
 }
 
-.contest-edition {
+.contest-right {
   background: $text-color;
-  font-size: 1.6rem;
   font-weight: 600;
-  color: #2A265F
+  color: #2A265F;
+  border-bottom-right-radius: $border-radius;
+  border-top-right-radius: $border-radius;
 }
-
+.contest-edition {
+  font-size: 1.5rem;
+}
+.contest-description {
+  font-size: 0.8rem;
+}
 .contest-button {
   position: absolute;
   right: 0.5rem;
   bottom: 0.5rem;
+  border-radius: $border-radius;
 }

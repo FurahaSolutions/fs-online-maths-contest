@@ -5,6 +5,7 @@ import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardComponent} from './dashboard.component';
 import {HeaderModule} from '../header/header.module';
 import {OrdinalModule} from '../shared/pipes/ordinal/ordinal.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {OrdinalModule} from '../shared/pipes/ordinal/ordinal.module';
     CommonModule,
     DashboardRoutingModule,
     HeaderModule,
-    OrdinalModule
+    OrdinalModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule {

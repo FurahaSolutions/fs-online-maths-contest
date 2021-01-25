@@ -8,6 +8,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {environment} from '../environments/environment';
 import {ApiInterceptor} from './shared/interceptors/api.interceptor';
+import {JwtInterceptor} from './shared/interceptors/jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {ApiInterceptor} from './shared/interceptors/api.interceptor';
   providers: [
     { provide: 'apiBaseUrl', useValue: environment.apiBaseUrl },
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

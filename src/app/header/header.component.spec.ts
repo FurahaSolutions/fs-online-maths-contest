@@ -49,7 +49,7 @@ describe('HeaderComponent', () => {
   describe('function logout()', () => {
     it('should call "authService.logout()"', () => {
        const logoutSpy = spyOn(authService, 'logout').and.returnValue(of(true));
-       component.logout();
+       fixture.ngZone.run(() => component.logout());
        expect(logoutSpy).toHaveBeenCalled();
     });
     it('should navigate user to login page', () => {

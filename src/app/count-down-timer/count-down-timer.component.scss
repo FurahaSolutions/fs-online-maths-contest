@@ -1,0 +1,41 @@
+.timer {
+  width: fit-content;
+  font-family: digital-clock-font, sans-serif;
+  font-size: 2rem;
+  line-height: 2rem;
+  background: #1f1f1f;
+  padding: 2px;
+}
+.digit {
+  width: 4rem;
+  background: #000;
+  padding: 1px;
+  margin: 1px;
+  height: 2rem;
+  border-radius: 0.2rem;
+}
+
+.warn {
+  color: orange;
+  box-shadow: orange;
+}
+
+.blink {
+  animation: blinker 1.5s linear 5;
+}
+
+
+@keyframes blinker {
+  60% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 1;
+  }
+}
+.message {
+  font-family: Roboto, sans-serif ;
+  margin-left: 1rem;
+  font-size: 1rem;
+  line-height: 2rem;
+}

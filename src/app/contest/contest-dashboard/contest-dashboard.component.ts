@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {ContestService} from '../../shared/services/contest.service';
+import {ActivatedRoute} from '@angular/router';
+import {map, mergeMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-contest-dashboard',
   templateUrl: './contest-dashboard.component.html',
   styleUrls: ['./contest-dashboard.component.scss']
 })
-export class ContestDashboardComponent implements OnInit {
+export class ContestDashboardComponent {
 
-  constructor() { }
+  contestEditions$ = this.activatedRoute.paramMap.pipe(
+    map((params) => Number(params.get('contestId'))),
+    mergeMap(contestId => this.contestService.getContestWithId({contestId}))
+  );
 
-  ngOnInit(): void {
+  constructor(private contestService: ContestService, private activatedRoute: ActivatedRoute) {
   }
+
 
 }

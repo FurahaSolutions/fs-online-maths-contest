@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="container-fluid" *ngIf="eventLeaderboard$ | async as eventLeaderboard" >
+  <div class="d-flex">
+    <div class="col-lg-5">
+      <h1>Event Details</h1>
+      {{ eventLeaderboard.event | json }}
+    </div>
+    <div class="col-lg-7">
+      <table class="table table-dark text-light">
+        <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Points</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of eventLeaderboard.leaderboard ; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ user.firstName }} {{ user.lastName }}</td>
+          <td>{{ user.points }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
